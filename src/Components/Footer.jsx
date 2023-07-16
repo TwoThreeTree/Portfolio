@@ -7,7 +7,8 @@ export const Footer = () => {
     <footer className="bg-primary py-12">
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row space-y-6 lg:space-y-0 items-center justify-around">
-          <div className="flex w-fit justify-center space-x-6">
+          <div className="flex w-fit justify-center flex-col items-center gap-5 space-x-6">
+            <p> Here's links to my LinkedIn and Github </p>
             <Socials />
           </div>
           <img className="w-1/4" src={logo} />

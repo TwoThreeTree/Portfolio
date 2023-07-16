@@ -3,6 +3,7 @@ import { inViewHandler } from "../animationHandler";
 import { motion, useAnimation } from "framer-motion";
 import { InView } from "react-intersection-observer";
 import emailjs from "emailjs-com";
+import { Store } from "react-notifications-component";
 
 export const Contact = () => {
   const animation = useAnimation();
@@ -10,10 +11,26 @@ export const Contact = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
 
   const [emailStatus, setEmailStatus] = useState("");
   const form = useRef();
 
+  const postNotification = (message) => {
+    Store.addNotification({
+      title: { message },
+      message: "teodosii@react-notifications-component",
+      type: "success",
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 5000,
+        onScreen: true,
+      },
+    });
+  };
   const sendEmail = (e) => {
     e.preventDefault();
     if (!name || !email || !subject || !message) {
@@ -38,12 +55,15 @@ export const Contact = () => {
         import.meta.env.VITE_EMAILJS_USER_ID
       )
       .then((result) => {
-        console.log(result.text);
+        // console.log(result.text);
         setEmailStatus("success");
+        console.log(emailStatus);
       })
-      .catch((error) => {
-        console.log(error.text);
-        setEmailStatus("error");
+      .catch((err) => {
+        // setEmailStatus("error");
+        alert(
+          "Failed sending this email, please check your connection and try again"
+        );
       });
   };
 
@@ -58,7 +78,9 @@ export const Contact = () => {
           >
             <div className="flex flex-col lg:gap-x-8  lg:flex-row justify-around items-center">
               <div className="flex text-center flex-col lg:w-1/3 h-[200px] justify-between sm:w-full sm:mb-5">
-                <h1 className="text-3xl">Contact Me</h1>
+                <h1 className="text-5xl font-bold text-violet-500">
+                  Contact Me
+                </h1>
                 <p>
                   Thank you for visiting my portfolio! If you have any inquiries
                   or would like to discuss potential collaborations or projects,
@@ -71,11 +93,11 @@ export const Contact = () => {
               <form
                 ref={form}
                 onSubmit={sendEmail}
-                className="space-y-8 bg-black px-5 py-5 lg:w-1/2 sm:w-full "
+                className="space-y-8 mt-2 bg-none px-5 py-5 lg:w-1/2 sm:w-full "
               >
                 <div className="flex gap-8">
                   <input
-                    className="input"
+                    className="input rounded-[20px]"
                     name="name"
                     type="text"
                     placeholder="your name"
@@ -84,7 +106,7 @@ export const Contact = () => {
                   />
 
                   <input
-                    className="input"
+                    className="input rounded-[20px]"
                     type="email"
                     name="email"
                     placeholder="your email"
@@ -93,9 +115,9 @@ export const Contact = () => {
                   />
                 </div>
 
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col  gap-8">
                   <input
-                    className="input"
+                    className="input rounded-[20px]"
                     type="text"
                     name="subject"
                     placeholder="subject"
@@ -104,7 +126,7 @@ export const Contact = () => {
                   />
 
                   <textarea
-                    className="textarea whitespace-pre-wrap"
+                    className="textarea rounded-[20px] whitespace-pre-wrap"
                     type="text"
                     name="message"
                     placeholder="message"
@@ -112,24 +134,30 @@ export const Contact = () => {
                     onChange={(e) => setMessage(e.target.value)}
                   />
                 </div>
-                <button className="btn btn-lg w-1/3 bg-blue-700 hover:bg-blue-900">
-                  Send
-                </button>
+                <div className="flex flex-row gap-[20px]">
+                  <button className="btn btn-lg w-1/3 rounded-[20px] bg-purple-900 hover:bg-purple-700">
+                    Send
+                  </button>
+                  {emailStatus === "empty" && (
+                    <div
+                      class="bg-red-100 border border-red-400 text-red-700 px-4 w-[fit-content] py-3 rounded-[20px] relative"
+                      role="alert"
+                    >
+                      <strong class="font-bold">Imcompleted Form</strong>
+                      <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+                    </div>
+                  )}
+                  {emailStatus === "success" && (
+                    <div
+                      class="bg-green-100 border border-green-400 text-green-700 px-4 w-[fit-content] py-3 rounded relative"
+                      role="alert"
+                    >
+                      <strong class="font-bold">Email Sent</strong>
+                      <span class="absolute top-0 bottom-0 right-0 px-4 py-3"></span>
+                    </div>
+                  )}
+                </div>
               </form>
-              {/* <form ref={form} onSubmit={sendEmail}>
-                <label>Name</label>
-                <input type="text" name="user_name" />
-                <label>Email</label>
-                <input type="email" name="user_email" />
-                <label>Message</label>
-                <textarea name="message" />
-                <input type="submit" value="Send" />
-              </form> */}
-            </div>
-
-            <div className="email-status mt-4">
-              {emailStatus === "empty" && <p>please fill out all fields</p>}
-              {emailStatus === "success" && <p>email sent</p>}
             </div>
           </motion.div>
         </div>

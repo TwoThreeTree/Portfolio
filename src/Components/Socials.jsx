@@ -3,7 +3,7 @@ import { social } from "../data";
 
 export const Socials = () => {
   return (
-    <div className=" hidden lg:block">
+    <div className=" lg:block">
       <ul className="flex space-x-6">
         {social.map((item, index) => (
           <li

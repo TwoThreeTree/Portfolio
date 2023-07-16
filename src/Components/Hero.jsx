@@ -1,7 +1,7 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { MeshDistortMaterial, Sphere, OrbitControls } from "@react-three/drei";
-import { ArrowSection } from "./ArrowSection";
+// import { ArrowSection } from "./ArrowSection";
 import { inViewHandler } from "../animationHandler";
 import { motion, useAnimation } from "framer-motion";
 import { InView } from "react-intersection-observer";
@@ -31,7 +31,7 @@ export const Hero = () => {
 
                 <Sphere args={[1, 100, 200]} scale={2.2}>
                   <MeshDistortMaterial
-                    color="#FFFF00"
+                    color="#800080"
                     attach="material"
                     distort={0.5}
                     speed={2}
@@ -61,9 +61,7 @@ export const Hero = () => {
             </div>
           </motion.div>
         </div>
-        <div className=" bg-primary flex justify-center items-center">
-          <ArrowSection />
-        </div>
+        <div className=" bg-primary flex justify-center items-center"></div>
       </section>
     </InView>
   );

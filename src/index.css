@@ -35,4 +35,8 @@
   .textarea {
     @apply resize-none w-full outline-none p-6 rounded-sm h-[200px] focus:outline focus:outline-1;
   }
+
+  .img {
+    @apply w-[30px] h-[30px];
+  }
 }

@@ -12,7 +12,7 @@ module.exports = {
       },
     },
     screens: {
-      sm: "500px",
+      sm: "600px",
       md: "768px",
       lg: "1024px",
       xl: "1300px",
@@ -22,6 +22,7 @@ module.exports = {
         primary: "#050816",
         secondary: "#ffffff",
         tertiary: "#000000",
+        shaded: "#1a1a1a",
       },
     },
   },
