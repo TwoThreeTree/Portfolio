@@ -9,15 +9,15 @@ export const Skills = () => {
 
   return (
     <InView onChange={(inView) => inViewHandler(inView, animation)}>
-      <section className="h-[200px] bg-primary py-12">
-        <div className="container bg-gradient-to-br from-violet-900 via-pink-700 to-red-900 rounded-[20px] h-[100px] lg:w-[500px] mx-auto flex items-center">
+      <section className="h-[fit] bg-primary py-12">
+        <div className="container mx-auto  bg-gradient-to-br from-violet-900 via-pink-700 to-red-900 rounded-[20px] p-6">
           <motion.div
-            className="flex flex-auto justify-around w-[500px] h-[60px] flex-wrap"
+            className="flex gap-2 flex-wrap justify-between items-center"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={animation}
           >
             {skills.map((skill, index) => (
-              <div className="max-h-xs" key={index}>
+              <div className="max-h-xs basis-20" key={index}>
                 <img src={skill.image} style={{ height: "50px" }} />
               </div>
             ))}

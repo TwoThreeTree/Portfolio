@@ -19,13 +19,18 @@ export const Portfolio = () => {
           >
             {projects.map((project, index) => (
               <div
-                className="flex flex-col  px-4 py-4 rounded-md bg-purple-950"
+                className="flex flex-col h-fit  px-4 py-4 rounded-md bg-purple-950"
                 key={index}
               >
                 <h1 className="text-xl text-center text mb-3">
                   {project.title}
                 </h1>
-                <img src={project.image} />
+                <a href={project.url} target="_blank">
+                  <img
+                    src={project.image}
+                    className="scale-90 hover:scale-100 rounded-md ease-in-out duration-200"
+                  ></img>{" "}
+                </a>
                 <p>{project.content}</p>
               </div>
             ))}
